@@ -62,7 +62,7 @@ Limits and terms change often. Checked 2026-11-01 against each provider's own pa
 | OpenRouter credits | $10 one time | Raises the free-model limit from 50 to 1,000 requests/day. Credits also pay for non-free models. |
 | [OpenCode Go](https://opencode.ai/go) | $10/month ($5 first month) | Stronger open models, capped at $12 of usage per 5 hours, $30 per week and $60 per month |
 | [Ollama Cloud](https://ollama.com/pricing) | Pay per token, or Pro at $20/month with $60 of usage | No longer free: since late October 2026 every cloud model is billed per token. Local Ollama models stay free. |
-| GitHub Copilot | Free plan, or paid | Connect with `opencode auth login` (GitHub Copilot). Students can check GitHub Education for Copilot Pro. |
+| GitHub Copilot | Free, Student (free), or $10 to $100/month | See "Students: GitHub Copilot Student" below. Connect with `opencode auth login github-copilot`. |
 | ChatGPT subscription in OpenCode | Your ChatGPT plan | `opencode auth login openai --method chatgpt-browser`, then approve in the browser. Tested 2026-11-01 on a paid plan: GPT-6 Luna, GPT-6.1 Sol and GPT-6 Astra all answered. Add `openai/<model>` to the lists to use it as a fallback step. |
 | Cerebras | $5 trial credit, card required, expires after 30 days | The no-card free tier ended in July 2026 (per Cerebras's changelog as quoted by trackers) |
 
@@ -71,6 +71,28 @@ Not listed: GitHub Models (reports conflict on whether it was retired in July 20
 To see OpenRouter's current free models: `curl -s https://openrouter.ai/api/v1/models | grep -o '"id":"[^"]*:free"'`. On 2026-11-01 there were 14, and all but one support tool calls.
 
 To use any of these, add the key, then add its models to the lists in `config/oh-my-opencode-slim.jsonc` (`provider/model`, as shown by `opencode models`).
+
+## Students: GitHub Copilot Student
+
+Verified students get GitHub's **Copilot Student** plan for free. It replaced free Copilot Pro for students in March 2026; free Copilot Pro is now only for verified teachers and maintainers of popular open-source projects. Many guides online still describe the old offer.
+
+**Who qualifies** (from GitHub's [student application requirements](https://docs.github.com/en/education/about-github-education/github-education-for-students/apply-to-github-education-as-a-student)):
+
+- At least 13 years old, with a personal GitHub account
+- Enrolled in a degree- or diploma-granting program: high school, college, university or homeschool
+- Proof of enrollment: a school email address, a photo of a school ID showing the current enrollment date, or an enrollment letter. If your school doesn't issue email addresses, a school webpage or letter explaining that policy works instead.
+
+**What the plan includes** (from GitHub's [plan comparison](https://docs.github.com/en/copilot/get-started/plans), checked 2026-11-01):
+
+- A monthly allowance of GitHub AI Credits. GitHub doesn't publish the amount for Free and Student; Copilot Pro ($10/month) includes 1,500.
+- **Auto model selection only**: GitHub picks the model, and you can't choose a specific one.
+- **Excludes third-party agents.**
+
+**Does it work in this setup?** Untested. The last two limits may stop it: OpenCode asks for a specific model by name, and GitHub may count OpenCode as a third-party agent. If you're a student with the plan, run `opencode auth login github-copilot`, then `opencode models | grep github-copilot`. If models appear, test one with `opencode run -m github-copilot/<model> "Reply with just: ok"`. Either way, the plan works in GitHub's own tools (VS Code, the GitHub website and GitHub's Copilot CLI).
+
+Third-party coverage reports that GitHub paused new sign-ups for some Copilot plans in April 2026. GitHub's plans page currently links to Student sign-up; check there if your application stalls.
+
+**How to apply:** [apply to GitHub Education](https://education.github.com/discount_requests/application) as a student. After approval, which can take a few days, Copilot Student appears under Copilot settings on your GitHub profile.
 
 ## Family and subscription plans
 
