@@ -1,0 +1,38 @@
+{
+  // Pick the preset that matches the keys you have. Switch any time with `/preset <name>` in OpenCode.
+  //   free                 OpenCode Zen free models only. No keys.
+  //   free-nvidia          + NVIDIA NIM (free key)
+  //   free-nvidia-openrouter  + OpenRouter :free models (key; see README for limits)
+  // Each agent's model is an ordered list. When one is rate-limited or over quota, the session moves to the next.
+  // Every provider in the active preset needs a key on this machine: a model without one stops the session.
+  // All models below answered on 2026-11-01. Free model lists change often; run ./test.sh to recheck.
+  "preset": "free",
+  "presets": {
+    "free": {
+      "orchestrator": { "model": ["opencode/big-pickle", "opencode/deepseek-v4.1-flash-free", "opencode/glm-5.3-flash-free"] },
+      "oracle":       { "model": ["opencode/deepseek-v4.1-flash-free", "opencode/big-pickle"] },
+      "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "opencode/glm-5.3-flash-free"] },
+      "fixer":        { "model": ["opencode/glm-5.3-flash-free", "opencode/deepseek-v4.1-flash-free"] },
+      "designer":     { "model": ["opencode/big-pickle", "opencode/mimo-v2.6-flash-free"] }
+    },
+    "free-nvidia": {
+      "orchestrator": { "model": ["opencode/big-pickle", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "opencode/deepseek-v4.1-flash-free"] },
+      "oracle":       { "model": ["opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b"] },
+      "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b"] },
+      "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1"] },
+      "designer":     { "model": ["opencode/big-pickle", "nvidia/minimaxai/minimax-m3.1-flash"] }
+    },
+    "free-nvidia-openrouter": {
+      "orchestrator": { "model": ["opencode/big-pickle", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
+      "oracle":       { "model": ["opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
+      "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free"] },
+      "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free"] },
+      "designer":     { "model": ["opencode/big-pickle", "nvidia/minimaxai/minimax-m3.1-flash", "openrouter/openrouter/free"] }
+    }
+  },
+  "fallback": { "enabled": true, "maxRetries": 2 },
+  // Council asks several models at once and uses up free quota fast; Observer needs a vision model.
+  "disabled_agents": ["observer", "council"],
+  // Helpers open as live panes beside the main one when OpenCode runs inside Herdr or tmux.
+  "multiplexer": { "type": "auto" }
+}

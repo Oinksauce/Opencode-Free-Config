@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Free, no key needed. Slim's preset picks each agent's models; this is only the fallback default.
+  "model": "opencode/big-pickle",
+  "plugin": ["oh-my-opencode-slim"],
+  // Ask before running shell commands; file edits stay automatic. Remove to allow commands without asking.
+  "permission": { "bash": "ask" }
+
+  // Optional: a model on your own machine as a last step that never runs out. See README, "Adding a local model".
+  // "provider": {
+  //   "ollama": {
+  //     "npm": "@ai-sdk/openai-compatible",
+  //     "models": { "qwen3-coder:30b": { "tool_call": true } },
+  //     "options": { "baseURL": "http://localhost:11434/v1" }
+  //   }
+  // }
+}
