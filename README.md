@@ -90,7 +90,7 @@ Verified students get GitHub's **Copilot Student** plan for free. It replaced fr
 
 **Does it work in this setup?** Untested. The last two limits may stop it: OpenCode asks for a specific model by name, and GitHub may count OpenCode as a third-party agent. If you're a student with the plan, run `opencode auth login github-copilot`, then `opencode models | grep github-copilot`. If models appear, test one with `opencode run -m github-copilot/<model> "Reply with just: ok"`. Either way, the plan works in GitHub's own tools (VS Code, the GitHub website and GitHub's Copilot CLI).
 
-Third-party coverage reports that GitHub paused new sign-ups for some Copilot plans in April 2026. GitHub's plans page currently links to Student sign-up; check there if your application stalls.
+Third-party coverage reports that GitHub paused new sign-ups for some Copilot plans in April 2026. GitHub's plans page linked to Student sign-up on 2026-11-01; check there if your application stalls.
 
 **How to apply:** [apply to GitHub Education](https://education.github.com/discount_requests/application) as a student. After approval, which can take a few days, Copilot Student appears under Copilot settings on your GitHub profile.
 
