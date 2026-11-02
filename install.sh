@@ -14,7 +14,7 @@ fi
 
 mkdir -p "$TARGET"
 # Sibling names that would also be read and could override ours.
-for f in opencode.json opencode.jsonc tui.json tui.jsonc oh-my-opencode-slim.json oh-my-opencode-slim.jsonc; do
+for f in opencode.json opencode.jsonc tui.json tui.jsonc oh-my-opencode-slim.json oh-my-opencode-slim.jsonc AGENTS.md; do
   p="$TARGET/$f"
   if [ -e "$p" ] || [ -L "$p" ]; then
     [ "$(readlink "$p" 2>/dev/null)" = "$REPO/config/$f" ] && continue

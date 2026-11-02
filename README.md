@@ -18,7 +18,7 @@ git clone https://github.com/Oinksauce/Opencode-Free-Config.git ~/Opencode-Free-
 ~/Opencode-Free-Config/test.sh
 ```
 
-`install.sh` works on macOS and Linux. It installs OpenCode if it is missing, backs up any existing OpenCode config files it would replace (`*.bak-<date>`), and links this repo's `config/` folder into `~/.config/opencode`. To update later, run `git -C ~/Opencode-Free-Config pull`.
+`install.sh` works on macOS and Linux. It installs OpenCode if it is missing, backs up any existing OpenCode config files it would replace (`*.bak-<date>`), and links this repo's `config/` folder into `~/.config/opencode`. That includes `AGENTS.md`, OpenCode's instructions for every session; it currently asks for math in LaTeX (`$$...$$`), which the desktop app renders as formatted equations. Add your own instructions there. To update later, run `git -C ~/Opencode-Free-Config pull`.
 
 `test.sh` checks that every model in the active preset answers, then has two helpers fix a small buggy file at the same time. `./test.sh models` runs only the first check.
 
