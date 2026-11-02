@@ -115,7 +115,7 @@ Inside a terminal multiplexer ([Herdr](https://herdr.dev) or tmux), helpers that
 - A provider with no key stops the session instead of being skipped (see "Choose a preset").
 - `opencode run` (non-interactive) ends when the orchestrator's turn ends, which stops helpers running in the background. `test.sh` asks the helpers to work side by side and wait instead. In normal interactive use, background helpers are fine.
 - Helpers' reports of which model they used are not reliable. The OpenCode logs show the real model.
-- Shell commands ask before running (`permission.bash: ask` in `config/opencode.jsonc`).
+- Tools run without approval prompts (`"permission": "allow"` in `config/opencode.jsonc`), including shell commands and edits outside the project folder. Agents can delete or overwrite files, so use it in folders under version control or that you can restore. To be asked before shell commands, change it to `"permission": { "bash": "ask" }`.
 
 ## Trying it on a Mac without changing your own setup
 

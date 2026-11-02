@@ -3,8 +3,9 @@
   // Free, no key needed. Slim's preset picks each agent's models; this is only the fallback default.
   "model": "opencode/big-pickle",
   "plugin": ["oh-my-opencode-slim"],
-  // Ask before running shell commands; file edits stay automatic. Remove to allow commands without asking.
-  "permission": { "bash": "ask" }
+  // Run every tool without asking, so helpers aren't stopped by prompts. For approval prompts on shell
+  // commands instead, use: "permission": { "bash": "ask" }
+  "permission": "allow"
 
   // Optional: a model on your own machine as a last step that never runs out. See README, "Adding a local model".
   // "provider": {
