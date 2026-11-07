@@ -29,14 +29,14 @@
       "oracle":       { "model": ["opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
       "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free"] },
       "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free"] },
-      "designer":     { "model": ["opencode/big-pickle", "nvidia/minimaxai/minimax-m3.1-flash", "openrouter/openrouter/free"] }
+      "designer":     { "model": ["opencode/big-pickle", "openrouter/openrouter/free", "nvidia/minimaxai/minimax-m3.1-flash"] }
     },
     "free-nvidia-openrouter-chatgpt": {
       "orchestrator": { "model": ["opencode/big-pickle", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
       "oracle":       { "model": ["openai/gpt-6-luna", "opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b"] },
       "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free"] },
       "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free"] },
-      "designer":     { "model": ["opencode/big-pickle", "nvidia/minimaxai/minimax-m3.1-flash", "openrouter/openrouter/free"] }
+      "designer":     { "model": ["opencode/big-pickle", "openrouter/openrouter/free", "nvidia/minimaxai/minimax-m3.1-flash"] }
     }
   },
   "fallback": { "enabled": true, "maxRetries": 2 },
