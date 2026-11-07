@@ -31,9 +31,9 @@ Set `"preset"` in `config/oh-my-opencode-slim.jsonc`, or type `/preset <name>` i
 | Preset | Keys needed | Fallback order for each helper |
 |---|---|---|
 | `free` (default) | none | OpenCode Zen free models only |
-| `free-nvidia` | NVIDIA | Zen, then NVIDIA |
-| `free-nvidia-openrouter` | NVIDIA, OpenRouter | Zen, then NVIDIA, then OpenRouter |
-| `free-nvidia-openrouter-chatgpt` | NVIDIA, OpenRouter, ChatGPT sign-in | As above, but the oracle starts on `openai/gpt-6-luna` |
+| `free-nvidia` | NVIDIA | NVIDIA, then Zen |
+| `free-nvidia-openrouter` | NVIDIA, OpenRouter | NVIDIA, then OpenRouter, then Zen (the designer starts NVIDIA, OpenRouter, NVIDIA, Zen) |
+| `free-nvidia-openrouter-chatgpt` | NVIDIA, OpenRouter, ChatGPT sign-in | As above, but the oracle is `openai/gpt-6-luna`, then NVIDIA, then Zen |
 
 The ChatGPT preset uses a free ChatGPT account (sign in with `opencode auth login`, OpenAI, ChatGPT) only for the oracle, the helper consulted on hard problems. The orchestrator answers every message and would use up a free allowance quickly. When ChatGPT reports its usage limit, the oracle moves to the next model in its list (tested 2026-11-06 with a simulated limit). A ChatGPT account can't use every OpenAI model OpenCode lists; `gpt-6.1-sol` is refused, for example.
 
@@ -42,6 +42,8 @@ The ChatGPT preset uses a free ChatGPT account (sign in with `opencode auth logi
 Use a preset only when you have every key it needs. A model whose provider has no key on your machine stops the session ("Model unavailable") instead of being skipped. Add keys with `opencode auth login`.
 
 Each step in a list uses a different provider, because usage limits usually belong to the account, not the model. In the `free` preset every step is on Zen, so a Zen-wide limit stops all of them at once; that is the reason to add a second provider.
+
+Zen comes last in the presets with keys. On OpenCode 2 the plugin can switch models only when OpenCode retries a failed request, and OpenCode does not retry Zen's "Free usage limit reached" error, so a session stops there instead of moving on (seen 2026-11-06 after 24 minutes and 81 steps on Big Pickle). Rate-limit errors from NVIDIA, OpenRouter and ChatGPT are retried, and the plugin then moves to the next model (tested with simulated errors the same day).
 
 ## Providers
 

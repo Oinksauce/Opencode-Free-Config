@@ -6,6 +6,8 @@
   //   free-nvidia-openrouter-chatgpt  + a ChatGPT account (Codex login in OpenCode) as the oracle only:
   //                        frontier advice for hard problems without spending the small free allowance on every message
   // Each agent's model is an ordered list. When one is rate-limited or over quota, the session moves to the next.
+  // Zen (opencode/*) goes last in the keyed presets: on OpenCode 2, Zen's "Free usage limit reached" is not retried,
+  // so the plugin never gets to switch models and the session stops. Nothing comes after it, so nothing is skipped.
   // Every provider in the active preset needs a key on this machine: a model without one stops the session.
   // All models below answered on 2026-11-01. Free model lists change often; run ./test.sh to recheck.
   "preset": "free",
@@ -18,25 +20,25 @@
       "designer":     { "model": ["opencode/big-pickle", "opencode/mimo-v2.6-flash-free"] }
     },
     "free-nvidia": {
-      "orchestrator": { "model": ["opencode/big-pickle", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "opencode/deepseek-v4.1-flash-free"] },
-      "oracle":       { "model": ["opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b"] },
-      "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b"] },
-      "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1"] },
-      "designer":     { "model": ["opencode/big-pickle", "nvidia/minimaxai/minimax-m3.1-flash"] }
+      "orchestrator": { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "opencode/big-pickle", "opencode/deepseek-v4.1-flash-free"] },
+      "oracle":       { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "opencode/deepseek-v4.1-flash-free"] },
+      "explorer":     { "model": ["nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "opencode/mimo-v2.6-flash-free"] },
+      "fixer":        { "model": ["nvidia/poolside/laguna-xs-2.1", "opencode/glm-5.3-flash-free"] },
+      "designer":     { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "nvidia/minimaxai/minimax-m3.1-flash", "opencode/big-pickle"] }
     },
     "free-nvidia-openrouter": {
-      "orchestrator": { "model": ["opencode/big-pickle", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
-      "oracle":       { "model": ["opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
-      "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free"] },
-      "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free"] },
-      "designer":     { "model": ["opencode/big-pickle", "openrouter/openrouter/free", "nvidia/minimaxai/minimax-m3.1-flash"] }
+      "orchestrator": { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free", "opencode/big-pickle"] },
+      "oracle":       { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free", "opencode/deepseek-v4.1-flash-free"] },
+      "explorer":     { "model": ["nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free", "opencode/mimo-v2.6-flash-free"] },
+      "fixer":        { "model": ["nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free", "opencode/glm-5.3-flash-free"] },
+      "designer":     { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/openrouter/free", "nvidia/minimaxai/minimax-m3.1-flash", "opencode/big-pickle"] }
     },
     "free-nvidia-openrouter-chatgpt": {
-      "orchestrator": { "model": ["opencode/big-pickle", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"] },
-      "oracle":       { "model": ["openai/gpt-6-luna", "opencode/deepseek-v4.1-flash-free", "nvidia/nvidia/nemotron-3-ultra-550b-a55b"] },
-      "explorer":     { "model": ["opencode/mimo-v2.6-flash-free", "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free"] },
-      "fixer":        { "model": ["opencode/glm-5.3-flash-free", "nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free"] },
-      "designer":     { "model": ["opencode/big-pickle", "openrouter/openrouter/free", "nvidia/minimaxai/minimax-m3.1-flash"] }
+      "orchestrator": { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free", "opencode/big-pickle"] },
+      "oracle":       { "model": ["openai/gpt-6-luna", "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "opencode/deepseek-v4.1-flash-free"] },
+      "explorer":     { "model": ["nvidia/nvidia/nemotron-3.5-lightning-30b-a3b", "openrouter/cohere/north-mini-code:free", "opencode/mimo-v2.6-flash-free"] },
+      "fixer":        { "model": ["nvidia/poolside/laguna-xs-2.1", "openrouter/cohere/north-mini-code:free", "opencode/glm-5.3-flash-free"] },
+      "designer":     { "model": ["nvidia/nvidia/nemotron-3-ultra-550b-a55b", "openrouter/openrouter/free", "nvidia/minimaxai/minimax-m3.1-flash", "opencode/big-pickle"] }
     }
   },
   "fallback": { "enabled": true, "maxRetries": 2 },
