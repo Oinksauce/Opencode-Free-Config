@@ -33,6 +33,11 @@ Set `"preset"` in `config/oh-my-opencode-slim.jsonc`, or type `/preset <name>` i
 | `free` (default) | none | OpenCode Zen free models only |
 | `free-nvidia` | NVIDIA | Zen, then NVIDIA |
 | `free-nvidia-openrouter` | NVIDIA, OpenRouter | Zen, then NVIDIA, then OpenRouter |
+| `free-nvidia-openrouter-chatgpt` | NVIDIA, OpenRouter, ChatGPT sign-in | As above, but the oracle starts on `openai/gpt-6-luna` |
+
+The ChatGPT preset uses a free ChatGPT account (sign in with `opencode auth login`, OpenAI, ChatGPT) only for the oracle, the helper consulted on hard problems. The orchestrator answers every message and would use up a free allowance quickly. When ChatGPT reports its usage limit, the oracle moves to the next model in its list (tested 2026-11-06 with a simulated limit). A ChatGPT account can't use every OpenAI model OpenCode lists; `gpt-6.1-sol` is refused, for example.
+
+`/preset <name>` switches only the session you are in. To change the default without editing the config, set `OH_MY_OPENCODE_SLIM_PRESET=<name>` in the environment that starts OpenCode; `test.sh` follows it too.
 
 Use a preset only when you have every key it needs. A model whose provider has no key on your machine stops the session ("Model unavailable") instead of being skipped. Add keys with `opencode auth login`.
 

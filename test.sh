@@ -14,18 +14,19 @@ fail=0
 if [ "${1:-}" != team ]; then
   echo "== Models (from $CFG)"
   models=$(python3 - "$CFG" <<'EOF'
-import json, re, sys
+import json, os, re, sys
 cfg = json.loads(re.sub(r'^\s*//.*$', '', open(sys.argv[1]).read(), flags=re.M))
 seen = []
-for agent in cfg['presets'][cfg['preset']].values():
+for agent in cfg['presets'][os.environ.get('OH_MY_OPENCODE_SLIM_PRESET') or cfg['preset']].values():
     for m in agent['model'] if isinstance(agent['model'], list) else [agent['model']]:
         if m not in seen: seen.append(m)
 print('\n'.join(seen))
 EOF
 )
   for m in $models; do
-    out=$(run 90 -m "$m" "Reply with just: ok" | tail -1)
-    if grep -qi '\bok\b' <<<"$out"; then echo "PASS $m"; else echo "FAIL $m  ${out:0:100}"; fail=1; fi
+    # Whole output, not the last line: OpenCode can print a shutdown notice after the answer.
+    out=$(run 90 -m "$m" "Reply with just: ok")
+    if grep -qiE '^ok\b' <<<"$out"; then echo "PASS $m"; else echo "FAIL $m  $(tail -1 <<<"$out" | cut -c1-100)"; fail=1; fi
   done
 fi
 [ "${1:-}" = models ] && exit $fail
